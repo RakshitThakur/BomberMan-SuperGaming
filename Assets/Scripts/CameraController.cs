@@ -12,7 +12,6 @@ public class CameraController : MonoBehaviour
     public static Action<Transform> OnPlayerSpawned;
     private void Awake()
     {
-
         OnPlayerSpawned += AssignPlayer;
     }
     private void OnDestroy()

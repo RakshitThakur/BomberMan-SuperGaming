@@ -120,27 +120,32 @@ public class Enemy : MonoBehaviour
 
             });
         }
-        //float totalWeight = 0;
-        //float weightSum = 0;
+       
 
-        //foreach(var item in possiblePlaces)
-        //{
-        //    totalWeight += item.weight;
-        //}
-        //float random = Random.Range(0, totalWeight);
-        //for (int i = 0; i < possiblePlaces.Count; i++)
-        //{
-        //    weightSum += possiblePlaces[i].weight;
-        //    if (random < weightSum)
-        //    {
-        //        return possiblePlaces[i];
-        //    }
-        //}
-        if(possiblePlaces.Count <=  0 )
+        if (possiblePlaces.Count <= 0)
         {
             return new PositionData();
         }
         else
+        {
+            float totalWeight = 0;
+            float weightSum = 0;
+            foreach (var item in possiblePlaces)
+            {
+                totalWeight += item.weight;
+            }
+            float random = Random.Range(0, totalWeight);
+            for (int i = 0; i < possiblePlaces.Count; i++)
+            {
+                weightSum += possiblePlaces[i].weight;
+                if (random < weightSum)
+                {
+                    return possiblePlaces[i];
+                }
+            }
             return possiblePlaces[Random.Range(0, possiblePlaces.Count)];
+
+        }
+          
     }
 }

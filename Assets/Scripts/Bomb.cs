@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-
-    private void OnEnable()
+    public void SetUp(bool explode = true)
     {
-        StartCoroutine(Explode());
+        if(explode)
+            StartCoroutine(Explode());
     }
+    //private void OnEnable()
+    //{
+    //    StartCoroutine(Explode());
+    //}
     IEnumerator Explode()
     {
         MenuManager.Instance?.StartBombTimer();

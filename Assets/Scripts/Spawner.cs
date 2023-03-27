@@ -50,6 +50,7 @@ public class Spawner : MonoBehaviour
         SpawnEnemies();
         instBomb = Instantiate(bomb, Vector3.zero, Quaternion.identity);
         instBomb.SetActive(false);
+        instBomb.GetComponent<Bomb>().SetUp(false);
     }
     void SpawnLevel()
     {
@@ -91,18 +92,19 @@ public class Spawner : MonoBehaviour
         Vector3 newPos = new Vector3(Mathf.RoundToInt(playerPos.x), 0f, Mathf.RoundToInt(playerPos.z));
         instBomb.transform.SetLocalPositionAndRotation(newPos, Quaternion.identity);
         instBomb.SetActive(true);
+        instBomb.GetComponent<Bomb>().SetUp(true);
         freeSpots.Remove(newPos);
     }
     public void SpawnEnemies()
     {
-        List<KeyValuePair<Vector3, SpotData>> freeSpotss = freeSpots.ToList();
-        RandomizeList(freeSpotss);
+        List<KeyValuePair<Vector3, SpotData>> freeSpotsList = freeSpots.ToList();
+        RandomizeList(freeSpotsList);
         int enemiesSpawned = 0;
-        for(int i = 0; i < freeSpotss.Count; i ++)
+        for(int i = 0; i < freeSpotsList.Count; i ++)
         {
-            if(enemiesToSpawn > enemiesSpawned && freeSpotss[i].Value.pos.x >= 1  && freeSpotss[i].Value.pos.z >= 1)
+            if(enemiesToSpawn > enemiesSpawned && freeSpotsList[i].Value.pos.x >= 1  && freeSpotsList[i].Value.pos.z >= 1)
             {
-                Instantiate(enemy, freeSpotss[i].Value.pos, Quaternion.identity);
+                Instantiate(enemy, freeSpotsList[i].Value.pos, Quaternion.identity);
                 enemiesSpawned++;
             }
         }
